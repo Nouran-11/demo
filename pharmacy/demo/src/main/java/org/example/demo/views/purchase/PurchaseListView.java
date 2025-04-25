@@ -10,4 +10,5 @@ public class PurchaseListView {
         box.setStyle("-fx-padding: 20;");
         return box;
     }
+
 }
