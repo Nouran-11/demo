@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import org.example.demo.sidebar.SidebarBuilder;
 
 public class MainApp extends Application {
+
     private static final int APP_WIDTH = 1200;
     private static final int APP_HEIGHT = 700;
     private static final String APP_TITLE = "Pharmacy Management System";
@@ -16,28 +17,27 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            loadResources();
+            // Load font
+            FontLoader.loadManropeFont();
 
+            // Set up root layout
             BorderPane root = createRootLayout();
             setupUI(root);
 
             // Create scene and configure stage
             Scene scene = new Scene(root, APP_WIDTH, APP_HEIGHT);
 
-            // If you have CSS
+            // Load CSS if present
             if (getClass().getResource(STYLESHEET_PATH) != null) {
                 scene.getStylesheets().add(getClass().getResource(STYLESHEET_PATH).toExternalForm());
             }
 
+            // Configure and show stage
             configureStage(primaryStage, scene);
 
         } catch (Exception e) {
             handleStartupError(e);
         }
-    }
-
-    private void loadResources() {
-        FontLoader.loadManropeFont();
     }
 
     private BorderPane createRootLayout() {
@@ -59,7 +59,7 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.setMinWidth(900);
         stage.setMinHeight(600);
-        stage.show();  // This is crucial - it makes the window appear
+        stage.show();
     }
 
     private void handleStartupError(Exception e) {

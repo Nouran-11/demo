@@ -126,10 +126,9 @@ public class SidebarBuilder {
         Map<String, String[]> menu = new LinkedHashMap<>();
         menu.put("Dashboard", null);
         menu.put("Purchase", new String[]{"Purchase List", "Payment", "Purchase Return", "Return Receive"});
-        menu.put("Products", new String[]{"Product List", "Product Package", "Product Damages"});
+        menu.put("Products", new String[]{"Product List", "Product Damages"});
         menu.put("Reports", new String[]{"Sales Report", "Sales Return Report", "Purchase Report"});
         menu.put("Stock", null);
-        menu.put("Customer", null);
         menu.put("Manufacturer", null);
         return menu;
     }
@@ -141,7 +140,6 @@ public class SidebarBuilder {
         iconMappings.put("Products", "product.png");
         iconMappings.put("Reports", "reports.png");
         iconMappings.put("Stock", "stock.png");
-        iconMappings.put("Customer", "customer.png");
         iconMappings.put("Manufacturer", "manufacturer.png");
 
         // Default fallback

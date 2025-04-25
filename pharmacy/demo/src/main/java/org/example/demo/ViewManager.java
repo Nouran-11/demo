@@ -3,6 +3,11 @@ package org.example.demo;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import org.example.demo.views.*;
+import org.example.demo.views.ProductDamagesView;
+import org.example.demo.views.PurchaseListView;
+import org.example.demo.views.PurchaseReturnView;
+import org.example.demo.views.SalesReportView;
+import org.example.demo.views.SalesReturnReportView;
 import org.example.demo.views.product.*;
 import org.example.demo.views.purchase.*;
 import org.example.demo.views.reports.*;
@@ -40,6 +45,7 @@ public class ViewManager {
                 case "reports" -> new ReportsView().getView();
                 case "settings" -> new SettingsView().getView();
                 case "stock" -> new StockView().getView();
+                case "manufacturer" -> new ManufacturerView().getView();
                 default -> throw new IllegalArgumentException("Unknown view: " + viewName);
             };
         } catch (Exception e) {

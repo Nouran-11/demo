@@ -6,10 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 
 import java.util.function.Function;
 
 public class DashboardView {
+    public DashboardView() {System.out.println("Default font: " + Font.getDefault().getName());} // ✅ Add this line
     public Parent getView() {
         // Main content area (center region)
         VBox mainContent = new VBox();
