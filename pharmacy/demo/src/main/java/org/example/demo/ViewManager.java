@@ -3,7 +3,6 @@ package org.example.demo;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import org.example.demo.views.*;
-import org.example.demo.views.ProductDamagesView;
 import org.example.demo.views.PurchaseListView;
 import org.example.demo.views.PurchaseReturnView;
 import org.example.demo.views.SalesReportView;

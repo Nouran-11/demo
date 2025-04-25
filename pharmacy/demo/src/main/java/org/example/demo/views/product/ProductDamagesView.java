@@ -1,4 +1,4 @@
-package org.example.demo.views;
+package org.example.demo.views.product;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
