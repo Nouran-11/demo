@@ -10,7 +10,7 @@ import org.example.demo.views.SalesReportView;
 import org.example.demo.views.SalesReturnReportView;
 import org.example.demo.views.product.*;
 import org.example.demo.views.purchase.*;
-import org.example.demo.views.reports.*;
+
 
 public class ViewManager {
     private final BorderPane mainLayout;
