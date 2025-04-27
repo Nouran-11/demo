@@ -1,0 +1,49 @@
+/* Buttons */
+.primary-button {
+    -fx-background-color: -primary-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.primary-button:hover {
+    -fx-background-color: -primary-dark;
+}
+
+.secondary-button {
+    -fx-background-color: -light-gray;
+    -fx-text-fill: -text-dark;
+    -fx-background-radius: 5px;
+    -fx-padding: 10 20;
+}
+
+/* Text Fields */
+.modern-text-field {
+    -fx-background-color: white;
+    -fx-border-color: -light-gray;
+    -fx-border-radius: 5px;
+    -fx-padding: 8 12;
+    -fx-font-size: 14px;
+}
+
+.modern-text-field:focused {
+    -fx-border-color: -primary-light;
+}
+
+/* Combo Box */
+.modern-combo {
+    -fx-background-color: white;
+    -fx-border-color: -light-gray;
+    -fx-border-radius: 5px;
+    -fx-padding: 6 12;
+    -fx-font-size: 14px;
+}
+
+/* Date Picker */
+.modern-date-picker {
+    -fx-background-color: white;
+    -fx-border-color: -light-gray;
+    -fx-border-radius: 5px;
+}

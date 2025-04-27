@@ -1,42 +1,48 @@
 package org.example.demo;
 
+import de.codecentric.centerdevice.javafxsvg.SvgImageLoaderFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.example.demo.sidebar.SidebarBuilder;
+import org.example.demo.FontLoader;
 
 public class MainApp extends Application {
 
+
+    // Configuration constants
     private static final int APP_WIDTH = 1200;
     private static final int APP_HEIGHT = 700;
     private static final String APP_TITLE = "Pharmacy Management System";
     private static final String BACKGROUND_STYLE = "-fx-background-color: #f5f6fa;";
-    private static final String STYLESHEET_PATH = "/styles/main.css";
 
     @Override
     public void start(Stage primaryStage) {
+
         try {
-            // Load font
-            FontLoader.loadManropeFont();
+            // Initialize application resources
+            initializeResources();
 
-            // Set up root layout
+            // Create root layout with view management
             BorderPane root = createRootLayout();
-            setupUI(root);
+            setupApplicationUI(root);
 
-            // Create scene and configure stage
-            Scene scene = new Scene(root, APP_WIDTH, APP_HEIGHT);
-
-            // Load CSS if present
-            if (getClass().getResource(STYLESHEET_PATH) != null) {
-                scene.getStylesheets().add(getClass().getResource(STYLESHEET_PATH).toExternalForm());
-            }
-
-            // Configure and show stage
-            configureStage(primaryStage, scene);
+            // Configure and show main window
+            launchMainWindow(primaryStage, root);
 
         } catch (Exception e) {
-            handleStartupError(e);
+            handleFatalError(e, primaryStage);
+        }
+    }
+
+    private void initializeResources() {
+        // Load application font
+        FontLoader.loadManropeFont();
+
+        if (!FontLoader.isManropeLoaded()) {
+            System.err.println("Warning: Using fallback system font");
         }
     }
 
@@ -46,7 +52,7 @@ public class MainApp extends Application {
         return root;
     }
 
-    private void setupUI(BorderPane root) {
+    private void setupApplicationUI(BorderPane root) {
         ViewManager viewManager = new ViewManager(root);
         SidebarBuilder sidebarBuilder = new SidebarBuilder(viewManager);
 
@@ -54,21 +60,56 @@ public class MainApp extends Application {
         root.setCenter(viewManager.getInitialView());
     }
 
-    private void configureStage(Stage stage, Scene scene) {
+    private void launchMainWindow(Stage stage, BorderPane root) {
+        Scene mainScene = createMainScene(root);
+
+
         stage.setTitle(APP_TITLE);
-        stage.setScene(scene);
-        stage.setMinWidth(900);
-        stage.setMinHeight(600);
+        stage.setScene(mainScene);
+        configureWindowBehavior(stage);
         stage.show();
     }
 
-    private void handleStartupError(Exception e) {
-        System.err.println("Application startup failed:");
+    private Scene createMainScene(BorderPane root) {
+        Scene scene = new Scene(root, APP_WIDTH, APP_HEIGHT);
+        scene.getRoot().setStyle(BACKGROUND_STYLE);
+        return scene;
+    }
+
+
+
+    private void configureWindowBehavior(Stage stage) {
+        stage.setMinWidth(900);
+        stage.setMinHeight(600);
+        stage.setOnCloseRequest(event -> {
+            // Add any cleanup operations here
+            System.out.println("Application closing...");
+        });
+    }
+
+    private void handleFatalError(Exception e, Stage stage) {
+        System.err.println("Fatal initialization error:");
         e.printStackTrace();
-        // TODO: Replace with proper logging or user-friendly error dialog
+
+        // Show error scene if possible
+        try {
+            BorderPane errorRoot = new BorderPane();
+            errorRoot.setCenter(new Label("Application failed to initialize\n" + e.getMessage()));
+            stage.setScene(new Scene(errorRoot, 400, 200));
+            stage.show();
+        } catch (Exception fatal) {
+            System.err.println("Could not even show error screen!");
+            fatal.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
-        launch(args);
+        try {
+            launch(args);
+        } catch (Exception e) {
+            System.err.println("Critical application failure:");
+            e.printStackTrace();
+        }
     }
+
 }
